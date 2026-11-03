@@ -6,14 +6,14 @@ window.title("Калькулятор")
 
 input_text = tk.StringVar()
 
-#Интерфейс логика
 def click_num(digit):
     input_text.set(input_text.get() + str(digit))
 
 def click_op(op_symbol):
-    current = input_text.get()
-    if current and not current.endswith(" "):
-        input_text.set(current + " " + op_symbol + " ")
+    input_text.set(input_text.get() + op_symbol)
+
+def click_trig_op(op_symbol):
+    input_text.set(input_text.get() + op_symbol + "(")
 
 def btn_clear():
     input_text.set("")
@@ -21,23 +21,19 @@ def btn_clear():
 def equal():
     try:
         expression = input_text.get()
-        parts = expression.split()
         
-        if len(parts) != 3:
-            input_text.set("Ошибка")
-            return
-            
-        first_num = float(parts[0])
-        operation = parts[1]
-        second_num = float(parts[2])
+        allowed_names = {
+            "Sin": calc.Sin,
+            "Cos": calc.Cos
+        }
         
-        if operation == "+": result = calc.add(first_num, second_num)
-        elif operation == "-": result = calc.subtract(first_num, second_num)
-        elif operation == "*": result = calc.multiply(first_num, second_num)
-        elif operation == "/": result = calc.divide(first_num, second_num)
-        elif operation == "%": result = calc.modulo(first_num, second_num)
-        else: result = "Ошибка"
-            
+        result = eval(expression, {"__builtins__": {}}, allowed_names)
+        
+        if isinstance(result, (int, float)):
+            result = round(result, 10)
+            if result % 1 == 0:
+                result = int(result)
+                
         input_text.set(result)
     except:
         input_text.set("Ошибка")
@@ -53,10 +49,10 @@ tk.Button(window, text="MR", width=7, height=2).grid(row=1, column=2)
 tk.Button(window, text="MC", width=7, height=2).grid(row=1, column=3)
 
 # Ряд 2
-tk.Button(window, text="Sin", width=7, height=2).grid(row=2, column=0)
-tk.Button(window, text="Cos", width=7, height=2).grid(row=2, column=1)
-tk.Button(window, text="xⁿ", width=7, height=2).grid(row=2, column=2)
-tk.Button(window, text="√", width=7, height=2).grid(row=2, column=3)
+tk.Button(window, text="Sin", width=7, height=2, command=lambda: click_trig_op("Sin")).grid(row=2, column=0)
+tk.Button(window, text="Cos", width=7, height=2, command=lambda: click_trig_op("Cos")).grid(row=2, column=1)
+tk.Button(window, text="xⁿ", width=7, height=2, command=lambda: click_op("**")).grid(row=2, column=2)
+tk.Button(window, text=")", width=7, height=2, command=lambda: click_op(")")).grid(row=2, column=3)
 
 # Ряд 3
 tk.Button(window, text="7", width=7, height=2, command=lambda: click_num(7)).grid(row=3, column=0)
@@ -86,4 +82,3 @@ tk.Button(window, text="+", width=7, height=2, command=lambda: click_op("+")).gr
 tk.Button(window, text="=", width=32, height=2, bg="#4caf50", fg="white", command=equal).grid(row=7, column=0, columnspan=4)
 
 window.mainloop()
-
