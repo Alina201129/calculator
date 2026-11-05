@@ -1,3 +1,5 @@
+import math
+
 def add(a, b):
     return a + b
 
@@ -17,4 +19,11 @@ def modulo(a, b):
         return "Ошибка: деление на 0"
     return a % b
 
+def degree(a, b):
+    return a ** b
 
+def Sin(a):
+    return math.sin(math.radians(a))
+    
+def Cos(a):
+    return math.cos(math.radians(a))
