@@ -77,13 +77,13 @@ tk.Button(window, text="MC", width=7, height=2, command=memory_clear).grid(row=1
 
 tk.Button(window, text="Sin", width=7, height=2, command=lambda: click_trig_op("Sin")).grid(row=2, column=0)
 tk.Button(window, text="Cos", width=7, height=2, command=lambda: click_trig_op("Cos")).grid(row=2, column=1)
-tk.Button(window, text="xⁿ", width=7, height=2, command=lambda: click_op("**")).grid(row=2, column=2)
+tk.Button(window, text="(", width=7, height=2, command=lambda: click_op("(")).grid(row=2, column=2)
 tk.Button(window, text=")", width=7, height=2, command=lambda: click_op(")")).grid(row=2, column=3)
 
 tk.Button(window, text="√", width=7, height=2, command=lambda: click_trig_op("Sqrt")).grid(row=3, column=0)
 tk.Button(window, text="Floor", width=7, height=2, command=lambda: click_trig_op("Floor")).grid(row=3, column=1)
 tk.Button(window, text="Ceil", width=7, height=2, command=lambda: click_trig_op("Ceil")).grid(row=3, column=2)
-tk.Button(window, text="M-", width=7, height=2, command=memory_subtract).grid(row=3, column=3)
+tk.Button(window, text="xⁿ", width=7, height=2, command=lambda: click_op("**")).grid(row=3, column=3)
 
 tk.Button(window, text="7", width=7, height=2, command=lambda: click_num(7)).grid(row=4, column=0)
 tk.Button(window, text="8", width=7, height=2, command=lambda: click_num(8)).grid(row=4, column=1)
@@ -105,6 +105,7 @@ tk.Button(window, text=".", width=7, height=2, command=lambda: click_num(".")).g
 tk.Button(window, text="-", width=7, height=2, command=lambda: click_op("-")).grid(row=7, column=2)
 tk.Button(window, text="+", width=7, height=2, command=lambda: click_op("+")).grid(row=7, column=3)
 
-tk.Button(window, text="=", width=32, height=2, bg="#4caf50", fg="white", command=equal).grid(row=8, column=0, columnspan=4)
+tk.Button(window, text="=", width=23, height=2, bg="#4caf50", fg="white", command=equal).grid(row=8, column=0, columnspan=3)
+tk.Button(window, text="M-", width=7, height=2, command=memory_subtract).grid(row=8, column=3)
 
 window.mainloop()
