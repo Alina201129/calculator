@@ -27,3 +27,14 @@ def Sin(a):
     
 def Cos(a):
     return math.cos(math.radians(a))
+
+def Sqrt(a):
+    if a < 0:
+        return "Ошибка: корень из отрицательного"
+    return math.sqrt(a)
+
+def Floor(a):
+    return math.floor(a)
+
+def Ceil(a):
+    return math.ceil(a)
