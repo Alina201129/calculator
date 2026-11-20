@@ -56,7 +56,8 @@ def equal():
             "Ceil": calc.Ceil
         }
         
-        result = eval(expression, allowed_names)
+        result = eval(expression, {"__builtins__": {}}, allowed_names)
+
         
         if isinstance(result, (int, float)):
             result = round(result, 10)
@@ -108,4 +109,5 @@ tk.Button(window, text="+", width=7, height=2, command=lambda: click_op("+")).gr
 tk.Button(window, text="=", width=23, height=2, bg="#4caf50", fg="white", command=equal).grid(row=8, column=0, columnspan=3)
 tk.Button(window, text="M-", width=7, height=2, command=memory_subtract).grid(row=8, column=3)
 
-window.mainloop()
+if __name__ == "__main__":
+    window.mainloop()
